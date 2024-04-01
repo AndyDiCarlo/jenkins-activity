@@ -19,6 +19,7 @@ pipeline{
         stage("Build basic docker file"){
             steps{
                 dir("C:/Users/dicarloa/Desktop/School/Baylor/Software Engineering/demo"){
+                    bat "sudo systemctl status docker"
                     bat "docker build -t andydicarlo/presentation_hub ."
                 }
             }
@@ -27,7 +28,7 @@ pipeline{
         stage("Push image to Dockerhub"){
             steps{
                 script{
-                    withCredentials([string(credentialsId: 'f8a1abf6-7b6f-4b1c-8a72-c6f293922c29', variable: 'dpw')]) {
+                    withCredentials([string(credentialsId: 'dockpw', variable: 'dockpw')]) {
                         bat "docker login -u andydicarlo -p %dpw%"
                         bat "docker push andydicarlo/presentation_hub"
                     }
