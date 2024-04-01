@@ -28,7 +28,7 @@ pipeline{
             steps{
                 script{
                     withCredentials([string(credentialsId: 'dockpw', variable: 'dockpw')]) {
-                        bat "docker login -u andydicarlo -p %dpw%"
+                        bat "docker login -u andydicarlo -p %dockpw%"
                         bat "docker push andydicarlo/presentation_hub"
                     }
                 }
