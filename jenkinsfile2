@@ -19,7 +19,7 @@ pipeline{
         stage("Build basic docker file"){
             steps{
                 dir("C:/Users/dicarloa/Desktop/School/Baylor/Software Engineering/demo"){
-
+                    bat "mvn clean install"
                 }
             }
         }
@@ -27,9 +27,8 @@ pipeline{
         stage("Push image to Dockerhub"){
             steps{
                 script{
-                    withCredentials([string(credentialsId: 'dockpw', variable: 'dockpw')]) {
-                        
-                    }
+                    bat "mvn clean install"
+                    bat "mvn clean install"
                 }
             }
         }
