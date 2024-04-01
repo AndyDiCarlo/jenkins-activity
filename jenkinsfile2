@@ -10,7 +10,7 @@ pipeline{
 
                 bat "mvn -version"
 
-                dir("C:\Users\dicarloa\Desktop\School\Baylor\Software Engineering\demo"){
+                dir("C:/Users/dicarloa/Desktop/School/Baylor/Software Engineering/demo"){
                     bat "mvn clean install"
                 }
             }
@@ -18,7 +18,7 @@ pipeline{
 
         stage("Build basic docker file"){
             steps{
-                dir("C:\Users\dicarloa\Desktop\School\Baylor\Software Engineering\demo"){
+                dir("C:/Users/dicarloa/Desktop/School/Baylor/Software Engineering/demo"){
                     bat "docker build -t andydicarlo/presentation_hub ."
                 }
             }
