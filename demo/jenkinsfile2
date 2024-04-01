@@ -5,12 +5,14 @@ pipeline{
     }
     stages{
         stage("MVN test"){
-            checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/AndyDiCarlo/jenkins-activity/']])
+            steps{
+                checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/AndyDiCarlo/jenkins-activity/']])
 
-            bat "mvn -version"
+                bat "mvn -version"
 
-            dir("C:\Users\dicarloa\Desktop\School\Baylor\Software Engineering\demo"){
-                bat "mvn clean install"
+                dir("C:\Users\dicarloa\Desktop\School\Baylor\Software Engineering\demo"){
+                    bat "mvn clean install"
+                }
             }
         }
 
