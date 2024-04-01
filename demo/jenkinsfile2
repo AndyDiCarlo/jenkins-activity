@@ -1,0 +1,41 @@
+pipeline{
+    agent any
+    tools{
+        maven "maven_3_9_6"
+    }
+    stages{
+        stage("MVN test"){
+            checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/AndyDiCarlo/jenkins-activity/']])
+
+            bat "mvn -version"
+
+            dir("C:\Users\dicarloa\Desktop\School\Baylor\Software Engineering\demo"){
+                bat "mvn clean install"
+            }
+        }
+
+        stage("Build basic docker file"){
+            steps{
+                dir("C:\Users\dicarloa\Desktop\School\Baylor\Software Engineering\demo"){
+                    bat "docker build -t andydicarlo/presentation_hub ."
+                }
+            }
+        }
+
+        stage("Push image to Dockerhub"){
+            steps{
+                script{
+                    withCredentials([string(credentialsId: 'f8a1abf6-7b6f-4b1c-8a72-c6f293922c29', variable: 'dpw')]) {
+                        bat "docker login -u andydicarlo -p %dpw%"
+                        bat "docker push andydicarlo/presentation_hub"
+                    }
+                }
+            }
+        }
+    }
+    post{
+        always{
+            cleanWS()
+        }
+    }
+}
